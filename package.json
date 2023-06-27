@@ -1,0 +1,16 @@
+{
+  "name": "concealbot-new",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Felipe Guajardo",
+    "email": "felipgg@gmail.com",
+    "url": "https://github.com/pipexlul"
+  },
+  "license": "ISC"
+}
