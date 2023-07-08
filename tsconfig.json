@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "@sapphire/ts-config",
+    "@sapphire/ts-config/extra-strict-without-decorators"
+  ],
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "outDir": "dist"
+  }
+}
