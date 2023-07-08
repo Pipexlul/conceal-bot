@@ -12,5 +12,21 @@
     "email": "felipgg@gmail.com",
     "url": "https://github.com/pipexlul"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@sapphire/eslint-config": "^4.4.3",
+    "@sapphire/prettier-config": "^1.4.5",
+    "@sapphire/ts-config": "^4.0.0",
+    "@types/node": "^20.4.1",
+    "eslint": "^8.44.0",
+    "nodemon": "^2.0.22",
+    "prettier": "^3.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@sapphire/framework": "^4.5.0",
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1"
+  }
 }
