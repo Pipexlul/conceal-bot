@@ -1,0 +1,4 @@
+Improvements:
+  ☐ Create validator module
+  ☐ Modularize config related code
+  ☐ Evaluate if process.env properties should be optional
