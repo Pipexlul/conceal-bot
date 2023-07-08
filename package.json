@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "dev": "tsc"
+    "dev": "nodemon --watch ./src/**/*.ts ./src/app.ts"
   },
   "keywords": [],
   "author": {
