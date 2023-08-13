@@ -4,7 +4,11 @@ module.exports = {
     es2021: true,
     node: true
   },
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   overrides: [
     {
       env: {
@@ -22,5 +26,8 @@ module.exports = {
     sourceType: "module"
   },
   plugins: ["@typescript-eslint"],
-  rules: {}
+  rules: {
+    "import/prefer-default-export": 0,
+    "@typescript-eslint/no-unused-vars": [2, { argsIgnorePattern: "^_" }]
+  }
 };
