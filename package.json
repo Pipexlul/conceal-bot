@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@sapphire/framework": "^4.5.1",
-    "discord.js": "^14.12.1"
+    "discord.js": "^14.12.1",
+    "dotenv": "^16.3.1"
   }
 }
