@@ -27,5 +27,9 @@
     "lint-staged": "^13.2.3",
     "prettier": "^3.0.1",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@sapphire/framework": "^4.5.1",
+    "discord.js": "^14.12.1"
   }
 }
