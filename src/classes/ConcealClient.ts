@@ -9,6 +9,8 @@ class ConcealClient extends SapphireClient {
 
   constructor(saphOptions: ClientOptions, options?: ConcealClientOptions) {
     super(saphOptions);
+    // TODO: Change store paths here if needed
+
     this.customOptions = options;
   }
 }
