@@ -7,7 +7,10 @@ class ConcealClient extends SapphireClient {
   private rootData = getRootData();
   private customOptions?: ConcealClientOptions;
 
-  constructor(saphOptions: ClientOptions, options?: ConcealClientOptions) {
+  public constructor(
+    saphOptions: ClientOptions,
+    options?: ConcealClientOptions
+  ) {
     super(saphOptions);
     // TODO: Change store paths here if needed
 
