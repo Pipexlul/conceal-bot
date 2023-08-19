@@ -1,8 +1,8 @@
-import { SapphireClient } from "@sapphire/framework";
+import ConcealClient from "./classes/ConcealClient";
 
 import { intents } from "./config/gatewayIntents";
 
-const client = new SapphireClient({
+const client = new ConcealClient({
   intents: intents,
   loadMessageCommandListeners: true
 });

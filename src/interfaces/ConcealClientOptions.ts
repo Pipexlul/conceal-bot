@@ -1,0 +1,3 @@
+interface ConcealClientOptions {}
+
+export { ConcealClientOptions };
