@@ -1,12 +1,12 @@
 import { ActivityType } from "discord.js";
 
 import envConfig from "./config/env";
-const { discordToken, node_env } = envConfig;
+const { discordToken } = envConfig;
 
 import saphClient from "./client";
 import { applyExitHandlers } from "./utils/appExitHandler";
 
-const isDev = node_env === "development";
+import { isDev } from "./utils/envUtils";
 
 const main = async () => {
   try {
