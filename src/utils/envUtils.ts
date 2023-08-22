@@ -4,4 +4,13 @@ const isDev = envConfig.node_env === "development";
 const isTest = envConfig.node_env === "test";
 const isProd = envConfig.node_env === "production";
 
-export { isDev, isTest, isProd };
+const getServerIds = () => {
+  const result: string[] = [envConfig.testServerId];
+  if (isProd) {
+    result.push(envConfig.realServerId);
+  }
+
+  return result;
+};
+
+export { isDev, isTest, isProd, getServerIds };

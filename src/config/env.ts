@@ -8,6 +8,7 @@ const {
   NODE_ENV,
   PORT,
   DISCORD_BOT_TOKEN,
+  REAL_SERVER_ID,
   TEST_SERVER_ID,
   ELEVENLABS_API_KEY,
   INWORLD_API_KEY
@@ -30,6 +31,7 @@ const config = {
   node_env: isValidEnvironment(NODE_ENV) ? NODE_ENV : "development",
   port: !isNaN(numPort) ? numPort : 3000,
   discordToken: DISCORD_BOT_TOKEN,
+  realServerId: isValid(REAL_SERVER_ID) ? REAL_SERVER_ID : "",
   testServerId: isValid(TEST_SERVER_ID) ? TEST_SERVER_ID : "",
   apiKeys: {
     elevenlabs: isValid(ELEVENLABS_API_KEY) ? ELEVENLABS_API_KEY : "",

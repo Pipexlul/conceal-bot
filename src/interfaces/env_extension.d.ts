@@ -4,6 +4,7 @@ declare namespace NodeJS {
     readonly PORT?: string;
 
     readonly DISCORD_BOT_TOKEN?: string;
+    readonly REAL_SERVER_ID?: string;
     readonly TEST_SERVER_ID?: string;
 
     readonly ELEVENLABS_API_KEY?: string;
