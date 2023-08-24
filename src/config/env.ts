@@ -7,6 +7,7 @@ import type { EnvType } from "../types/env";
 const {
   NODE_ENV,
   PORT,
+  OWNER_ID,
   DISCORD_BOT_TOKEN,
   REAL_SERVER_ID,
   TEST_SERVER_ID,
@@ -30,6 +31,7 @@ if (!isValid(DISCORD_BOT_TOKEN)) {
 const config = {
   node_env: isValidEnvironment(NODE_ENV) ? NODE_ENV : "development",
   port: !isNaN(numPort) ? numPort : 3000,
+  ownerId: isValid(OWNER_ID) ? OWNER_ID : "",
   discordToken: DISCORD_BOT_TOKEN,
   realServerId: isValid(REAL_SERVER_ID) ? REAL_SERVER_ID : "",
   testServerId: isValid(TEST_SERVER_ID) ? TEST_SERVER_ID : "",

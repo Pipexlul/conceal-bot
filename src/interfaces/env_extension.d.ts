@@ -3,6 +3,8 @@ declare namespace NodeJS {
     readonly NODE_ENV?: string;
     readonly PORT?: string;
 
+    readonly OWNER_ID?: string;
+
     readonly DISCORD_BOT_TOKEN?: string;
     readonly REAL_SERVER_ID?: string;
     readonly TEST_SERVER_ID?: string;
