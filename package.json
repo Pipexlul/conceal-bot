@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "description": "",
   "main": "dist/app.js",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node dist/app.js",
-    "dev": "nodemon src/app.ts",
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\"",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -24,6 +25,7 @@
     "@types/node": "^18.15.3",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
+    "concurrently": "^8.2.1",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
