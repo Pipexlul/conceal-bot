@@ -29,5 +29,6 @@ module.exports = {
   rules: {
     "import/prefer-default-export": 0,
     "@typescript-eslint/no-unused-vars": [2, { argsIgnorePattern: "^_" }]
-  }
+  },
+  ignorePatterns: ["node_modules/", "dist/"]
 };
