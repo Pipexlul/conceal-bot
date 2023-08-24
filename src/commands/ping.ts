@@ -17,7 +17,8 @@ export class PingCommand extends Command {
     registry.registerChatInputCommand(
       (builder) => builder.setName(this.name).setDescription(this.description),
       {
-        guildIds: getServerIds()
+        guildIds: getServerIds(),
+        idHints: ["1093709132466507796"]
       }
     );
   }
