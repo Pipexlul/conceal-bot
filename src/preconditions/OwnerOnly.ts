@@ -1,4 +1,4 @@
-import { Precondition } from "@sapphire/framework";
+import { AllFlowsPrecondition } from "@sapphire/framework";
 import type {
   CommandInteraction,
   ContextMenuCommandInteraction,
@@ -8,7 +8,7 @@ import type {
 import envConfig from "../config/env";
 const { ownerId } = envConfig;
 
-export class OwnerOnlyPrecondition extends Precondition {
+export class OwnerOnlyPrecondition extends AllFlowsPrecondition {
   public override async messageRun(message: Message) {
     return this.checkOwner(message.author.id);
   }
