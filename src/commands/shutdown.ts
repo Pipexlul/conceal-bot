@@ -8,7 +8,7 @@ export class ShutdownCommand extends Command {
       ...options,
       name: "shutdown",
       description: "Shuts down the bot (owner only)",
-      preconditions: ["OwnerOnly"]
+      preconditions: ["OwnerOnly"],
     });
   }
 
@@ -17,7 +17,7 @@ export class ShutdownCommand extends Command {
       (builder) => builder.setName(this.name).setDescription(this.description),
       {
         guildIds: getServerIds(),
-        idHints: ["1144162080845467730"]
+        idHints: ["1144162080845467730"],
       }
     );
   }

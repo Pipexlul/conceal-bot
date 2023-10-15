@@ -9,6 +9,7 @@
     "prestart": "npm run build",
     "start": "node dist/app.js",
     "dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\"",
+    "dev-new": "tsnd --respawn src/app.ts",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -19,27 +20,28 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@commitlint/cli": "^17.7.1",
-    "@commitlint/config-conventional": "^17.7.0",
-    "@tsconfig/node-lts": "^18.12.3",
-    "@types/node": "^18.15.3",
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
+    "@commitlint/cli": "^17.8.0",
+    "@commitlint/config-conventional": "^17.8.0",
+    "@tsconfig/node-lts": "^18.12.5",
+    "@types/node": "^18.18.5",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
     "concurrently": "^8.2.1",
-    "eslint": "^8.47.0",
+    "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.2.3",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.3.0",
     "nodemon": "^3.0.1",
-    "prettier": "^3.0.1",
+    "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@sapphire/framework": "^4.5.1",
+    "@sapphire/framework": "^4.6.1",
     "@sapphire/pieces": "^3.7.0",
-    "discord.js": "^14.12.1",
+    "discord.js": "^14.13.0",
     "dotenv": "^16.3.1"
   }
 }

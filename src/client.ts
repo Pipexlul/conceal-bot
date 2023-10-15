@@ -7,8 +7,8 @@ const client = new ConcealClient({
   intents: intents,
   loadMessageCommandListeners: true,
   logger: {
-    level: LogLevel.Debug
-  }
+    level: LogLevel.Debug,
+  },
 });
 
 export default client;

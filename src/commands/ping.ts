@@ -9,7 +9,7 @@ export class PingCommand extends Command {
       ...options,
       name: "Ping",
       description: "Check epic ping connection",
-      aliases: ["pong", "enemybastion"]
+      aliases: ["pong", "enemybastion"],
     });
   }
 
@@ -18,7 +18,7 @@ export class PingCommand extends Command {
       (builder) => builder.setName(this.name).setDescription(this.description),
       {
         guildIds: getServerIds(),
-        idHints: ["1093709132466507796"]
+        idHints: ["1093709132466507796"],
       }
     );
   }
@@ -28,7 +28,7 @@ export class PingCommand extends Command {
   ) {
     const msg = await interaction.reply({
       content: "Pinging...",
-      fetchReply: true
+      fetchReply: true,
     });
 
     if (isMessageInstance(msg)) {

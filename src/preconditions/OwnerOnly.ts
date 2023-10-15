@@ -2,7 +2,7 @@ import { AllFlowsPrecondition } from "@sapphire/framework";
 import type {
   CommandInteraction,
   ContextMenuCommandInteraction,
-  Message
+  Message,
 } from "discord.js";
 
 import envConfig from "../config/env";
@@ -27,7 +27,7 @@ export class OwnerOnlyPrecondition extends AllFlowsPrecondition {
     return userId === ownerId
       ? this.ok()
       : this.error({
-          message: "This command can only be used by the bot owner"
+          message: "This command can only be used by the bot owner",
         });
   }
 }

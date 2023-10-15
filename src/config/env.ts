@@ -12,7 +12,7 @@ const {
   REAL_SERVER_ID,
   TEST_SERVER_ID,
   ELEVENLABS_API_KEY,
-  INWORLD_API_KEY
+  INWORLD_API_KEY,
 } = process.env;
 
 const isValid = (value?: string): value is string =>
@@ -37,8 +37,8 @@ const config = {
   testServerId: isValid(TEST_SERVER_ID) ? TEST_SERVER_ID : "",
   apiKeys: {
     elevenlabs: isValid(ELEVENLABS_API_KEY) ? ELEVENLABS_API_KEY : "",
-    inworld: isValid(INWORLD_API_KEY) ? INWORLD_API_KEY : ""
-  }
+    inworld: isValid(INWORLD_API_KEY) ? INWORLD_API_KEY : "",
+  },
 };
 
 export default config;

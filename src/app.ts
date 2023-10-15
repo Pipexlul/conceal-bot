@@ -23,9 +23,9 @@ const main = async () => {
       activities: [
         {
           name: `Ultrakill Act 3 ${isDev ? "Devrun" : "Speedrun"}`,
-          type: ActivityType.Competing
-        }
-      ]
+          type: ActivityType.Competing,
+        },
+      ],
     });
   } catch (err) {
     console.error(err);
