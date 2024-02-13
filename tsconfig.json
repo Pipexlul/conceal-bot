@@ -1,10 +1,16 @@
 {
-  "extends": "@tsconfig/node-lts/tsconfig.json",
-
-  "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-
-    "allowSyntheticDefaultImports": true
-  }
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "dist",
+		"lib": ["ES2023"],
+		"module": "Node16",
+		"target": "ES2022",
+		"strict": true,
+		"strictNullChecks": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "Node16",
+		"allowSyntheticDefaultImports": true
+	}
 }

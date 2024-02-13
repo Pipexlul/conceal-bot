@@ -5,12 +5,7 @@
   "main": "dist/app.js",
   "type": "commonjs",
   "scripts": {
-    "build": "tsc",
-    "prestart": "npm run build",
-    "start": "node dist/app.js",
-    "dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\"",
-    "dev-new": "tsnd --respawn src/app.ts",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": {
@@ -19,29 +14,19 @@
     "url": "https://github.com/pipexlul"
   },
   "license": "ISC",
-  "devDependencies": {
-    "@commitlint/cli": "^17.8.0",
-    "@commitlint/config-conventional": "^17.8.0",
-    "@tsconfig/node-lts": "^18.12.5",
-    "@types/node": "^18.18.5",
-    "@typescript-eslint/eslint-plugin": "^6.7.5",
-    "@typescript-eslint/parser": "^6.7.5",
-    "concurrently": "^8.2.1",
-    "eslint": "^8.51.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.3.0",
-    "nodemon": "^3.0.1",
-    "prettier": "^3.0.3",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.2.2"
-  },
   "dependencies": {
-    "@sapphire/framework": "^4.6.1",
-    "@sapphire/pieces": "^3.7.0",
-    "discord.js": "^14.13.0",
-    "dotenv": "^16.3.1"
-  }
+    "@dotenvx/dotenvx": "^0.15.4",
+    "@sapphire/framework": "^5.0.7",
+    "discord.js": "14.x"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.3",
+    "@types/lint-staged": "^13.3.0",
+    "@types/node": "^20.11.17",
+    "husky": "^9.0.10",
+    "lint-staged": "^15.2.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "pnpm@8.15.2"
 }

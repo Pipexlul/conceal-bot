@@ -1,0 +1,21 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+	"linter": {
+		"enabled": true,
+		"ignore": ["node_modules", "dist", "nuxt", ".platform", ".vscode"],
+		"rules": {
+			"recommended": true
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"enabled": true,
+			"arrowParentheses": "always",
+			"quoteStyle": "single",
+			"semicolons": "always",
+			"indentStyle": "space",
+			"indentWidth": 2,
+			"trailingComma": "es5"
+		}
+	}
+}
