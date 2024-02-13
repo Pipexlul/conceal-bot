@@ -11,7 +11,7 @@
 		"formatter": {
 			"enabled": true,
 			"arrowParentheses": "always",
-			"quoteStyle": "single",
+			"quoteStyle": "double",
 			"semicolons": "always",
 			"indentStyle": "space",
 			"indentWidth": 2,
