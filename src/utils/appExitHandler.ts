@@ -12,9 +12,9 @@ const applyExitHandlers = (client: SapphireClient) => {
     }
   };
 
-  terminateEvents.forEach((event) => {
+  for (const event of terminateEvents) {
     process.on(event, terminateHandler);
-  });
+  }
 
   console.log("Successfully applied exit handlers");
 };

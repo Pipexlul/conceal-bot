@@ -11,5 +11,7 @@ declare namespace NodeJS {
 
     readonly ELEVENLABS_API_KEY?: string;
     readonly INWORLD_API_KEY?: string;
+
+    readonly IS_QA?: string;
   }
 }

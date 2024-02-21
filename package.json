@@ -1,32 +1,34 @@
 {
-  "name": "concealbot",
-  "version": "0.1.0",
-  "description": "",
-  "main": "dist/app.js",
-  "type": "commonjs",
-  "scripts": {
-    "prepare": "husky"
-  },
-  "keywords": [],
-  "author": {
-    "name": "Felipe Guajardo",
-    "email": "felipgg@gmail.com",
-    "url": "https://github.com/pipexlul"
-  },
-  "license": "ISC",
-  "dependencies": {
-    "@dotenvx/dotenvx": "^0.15.4",
-    "@sapphire/framework": "^5.0.7",
-    "discord.js": "14.x"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.5.3",
-    "@types/lint-staged": "^13.3.0",
-    "@types/node": "^20.11.17",
-    "husky": "^9.0.10",
-    "lint-staged": "^15.2.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.3.3"
-  },
-  "packageManager": "pnpm@8.15.2"
+	"name": "concealbot",
+	"version": "0.1.0",
+	"description": "",
+	"main": "dist/app.js",
+	"type": "commonjs",
+	"scripts": {
+		"prepare": "husky",
+		"dev": "tsnd --respawn --transpile-only src/app.ts"
+	},
+	"keywords": [],
+	"author": {
+		"name": "Felipe Guajardo",
+		"email": "felipgg@gmail.com",
+		"url": "https://github.com/pipexlul"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"@dotenvx/dotenvx": "^0.15.4",
+		"@sapphire/framework": "^5.0.7",
+		"discord.js": "14.x",
+		"dotenv": "^16.4.5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.5.3",
+		"@types/lint-staged": "^13.3.0",
+		"@types/node": "^20.11.17",
+		"husky": "^9.0.10",
+		"lint-staged": "^15.2.2",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.3.3"
+	},
+	"packageManager": "pnpm@8.15.2"
 }

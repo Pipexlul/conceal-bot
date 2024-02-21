@@ -3,22 +3,22 @@ import { ActivityType } from "discord.js";
 import envConfig from "./config/env";
 const { discordToken } = envConfig;
 
-import saphClient from "./client";
+import concealClient from "./client";
 import { applyExitHandlers } from "./utils/appExitHandler";
 
 import { isDev } from "./utils/envUtils";
 
 const main = async () => {
   try {
-    saphClient.once("ready", () => {
-      console.log(`Logged in as ${saphClient.user!.tag}!`);
+    concealClient.once("ready", () => {
+      console.log(`Logged in as ${concealClient.user?.tag}!`);
     });
 
-    applyExitHandlers(saphClient);
+    applyExitHandlers(concealClient);
 
-    await saphClient.login(discordToken);
+    await concealClient.login(discordToken);
 
-    saphClient.user?.setPresence({
+    concealClient.user?.setPresence({
       status: "online",
       activities: [
         {

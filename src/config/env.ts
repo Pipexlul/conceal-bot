@@ -1,5 +1,4 @@
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 
 import { EnvTypesArr } from "../types/env";
 import type { EnvType } from "../types/env";
@@ -13,6 +12,7 @@ const {
   TEST_SERVER_ID,
   ELEVENLABS_API_KEY,
   INWORLD_API_KEY,
+  IS_QA,
 } = process.env;
 
 const isValid = (value?: string): value is string =>
@@ -22,7 +22,15 @@ const isValidEnvironment = (value?: string): value is EnvType => {
   return isValid(value) && EnvTypesArr.includes(value as EnvType);
 };
 
+const isValidEnvironmentBoolean = (value?: string): boolean => {
+  const lcVal = value?.toLowerCase();
+
+  return lcVal === "true" || lcVal === "false";
+};
+
 const numPort = isValid(PORT) ? parseInt(PORT) : NaN;
+
+const isQA = isValidEnvironmentBoolean(IS_QA);
 
 if (!isValid(DISCORD_BOT_TOKEN)) {
   throw new Error("DISCORD_BOT_TOKEN is required");
@@ -30,7 +38,8 @@ if (!isValid(DISCORD_BOT_TOKEN)) {
 
 const config = {
   node_env: isValidEnvironment(NODE_ENV) ? NODE_ENV : "development",
-  port: !isNaN(numPort) ? numPort : 3000,
+  isQa: isQA,
+  port: !Number.isNaN(numPort) ? numPort : 3000,
   ownerId: isValid(OWNER_ID) ? OWNER_ID : "",
   discordToken: DISCORD_BOT_TOKEN,
   realServerId: isValid(REAL_SERVER_ID) ? REAL_SERVER_ID : "",

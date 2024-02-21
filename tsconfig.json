@@ -11,6 +11,14 @@
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"moduleResolution": "Node16",
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/env": ["src/config/env"]
+		}
+	},
+	"include": ["src"],
+	"ts-node": {
+		"files": true
 	}
 }
