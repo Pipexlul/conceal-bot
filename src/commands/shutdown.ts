@@ -2,7 +2,7 @@ import { Command } from "@sapphire/framework";
 
 import { getServerIds } from "../utils/envUtils";
 
-export class ShutdownCommand extends Command {
+class ShutdownCommand extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
     super(context, {
       ...options,
@@ -31,3 +31,5 @@ export class ShutdownCommand extends Command {
     process.exit(0);
   }
 }
+
+export { ShutdownCommand };

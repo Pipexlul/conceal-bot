@@ -1,10 +1,10 @@
-import { Command } from "@sapphire/framework";
 import { isMessageInstance } from "@sapphire/discord.js-utilities";
+import { Command } from "@sapphire/framework";
 
 import { getServerIds } from "../utils/envUtils";
 
-export class PingCommand extends Command {
-  public constructor(context: Command.Context, options: Command.Options) {
+class PingCommand extends Command {
+  public constructor(context: Command.LoaderContext, options: Command.Options) {
     super(context, {
       ...options,
       name: "Ping",
@@ -33,12 +33,13 @@ export class PingCommand extends Command {
 
     if (isMessageInstance(msg)) {
       const diff = msg.createdTimestamp - interaction.createdTimestamp;
-      const ping = Math.round(this.container.client.ws.ping);
       return interaction.editReply(
-        `Pong: Round trip took: ${diff} milliseconds. Actual ping is: ${ping} milliseconds`
+        `Pong: Round trip took: ${diff} milliseconds`
       );
     }
 
     return interaction.editReply("Ping message could not be fetched :(");
   }
 }
+
+export { PingCommand };

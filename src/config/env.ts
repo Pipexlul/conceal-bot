@@ -6,13 +6,15 @@ import type { EnvType } from "../types/env";
 const {
   NODE_ENV,
   PORT,
-  OWNER_ID,
+  PIPEX_ID,
+  JACE_ID,
+  SWIZZ_ID,
   DISCORD_BOT_TOKEN,
   REAL_SERVER_ID,
   TEST_SERVER_ID,
   ELEVENLABS_API_KEY,
   INWORLD_API_KEY,
-  IS_QA,
+  TEST_ONLY,
 } = process.env;
 
 const isValid = (value?: string): value is string =>
@@ -30,17 +32,18 @@ const isValidEnvironmentBoolean = (value?: string): boolean => {
 
 const numPort = isValid(PORT) ? parseInt(PORT) : NaN;
 
-const isQA = isValidEnvironmentBoolean(IS_QA);
-
 if (!isValid(DISCORD_BOT_TOKEN)) {
   throw new Error("DISCORD_BOT_TOKEN is required");
 }
 
 const config = {
   node_env: isValidEnvironment(NODE_ENV) ? NODE_ENV : "development",
-  isQa: isQA,
   port: !Number.isNaN(numPort) ? numPort : 3000,
-  ownerId: isValid(OWNER_ID) ? OWNER_ID : "",
+  nibbas: {
+    pipex: isValid(PIPEX_ID) ? PIPEX_ID : "",
+    jace: isValid(JACE_ID) ? JACE_ID : "",
+    swizz: isValid(SWIZZ_ID) ? SWIZZ_ID : "",
+  },
   discordToken: DISCORD_BOT_TOKEN,
   realServerId: isValid(REAL_SERVER_ID) ? REAL_SERVER_ID : "",
   testServerId: isValid(TEST_SERVER_ID) ? TEST_SERVER_ID : "",
@@ -48,6 +51,7 @@ const config = {
     elevenlabs: isValid(ELEVENLABS_API_KEY) ? ELEVENLABS_API_KEY : "",
     inworld: isValid(INWORLD_API_KEY) ? INWORLD_API_KEY : "",
   },
+  testOnly: isValidEnvironmentBoolean(TEST_ONLY),
 };
 
 export default config;

@@ -6,9 +6,11 @@ import type {
 } from "discord.js";
 
 import envConfig from "../config/env";
-const { ownerId } = envConfig;
+const {
+  nibbas: { pipex },
+} = envConfig;
 
-export class OwnerOnlyPrecondition extends AllFlowsPrecondition {
+class PipexOnlyPrecondition extends AllFlowsPrecondition {
   public override async messageRun(message: Message) {
     return this.checkOwner(message.author.id);
   }
@@ -24,10 +26,12 @@ export class OwnerOnlyPrecondition extends AllFlowsPrecondition {
   }
 
   private async checkOwner(userId: string) {
-    return userId === ownerId
+    return userId === pipex
       ? this.ok()
       : this.error({
-          message: "This command can only be used by the bot owner",
+          message: "This command can only be used by Peezer",
         });
   }
 }
+
+export { PipexOnlyPrecondition };
