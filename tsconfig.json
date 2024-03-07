@@ -12,10 +12,11 @@
 		"forceConsistentCasingInFileNames": true,
 		"moduleResolution": "Node16",
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": ".",
-		"paths": {
-			"@/env": ["src/config/env"]
-		}
+		// "baseUrl": "./src",
+		// "paths": {
+		// 	"@/env": ["config/env"],
+		// 	"@/services": ["services"]
+		// }
 	},
 	"include": ["src"],
 	"ts-node": {

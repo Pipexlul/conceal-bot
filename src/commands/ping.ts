@@ -18,7 +18,6 @@ class PingCommand extends Command {
       (builder) => builder.setName(this.name).setDescription(this.description),
       {
         guildIds: serverIds,
-        idHints: ["1093709132466507796"],
       }
     );
   }

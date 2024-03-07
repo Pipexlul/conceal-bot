@@ -1,6 +1,6 @@
 import { ElevenLabsClient } from "elevenlabs";
 
-import envVars from "@/env";
+import envVars from "../../config/env";
 const {
   apiKeys: { elevenlabs },
 } = envVars;

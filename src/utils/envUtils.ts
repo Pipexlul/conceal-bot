@@ -15,4 +15,6 @@ const getServerIds = () => {
 
 const serverIds = getServerIds();
 
+console.log(serverIds);
+
 export { isDev, isTest, isProd, serverIds };

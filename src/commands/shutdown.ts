@@ -1,6 +1,6 @@
 import { Command } from "@sapphire/framework";
 
-import { getServerIds } from "../utils/envUtils";
+import { serverIds } from "../utils/envUtils";
 
 class ShutdownCommand extends Command {
   public constructor(context: Command.Context, options: Command.Options) {
@@ -16,8 +16,7 @@ class ShutdownCommand extends Command {
     registry.registerChatInputCommand(
       (builder) => builder.setName(this.name).setDescription(this.description),
       {
-        guildIds: getServerIds(),
-        idHints: ["1144162080845467730"],
+        guildIds: serverIds,
       }
     );
   }

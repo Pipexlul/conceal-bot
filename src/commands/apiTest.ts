@@ -1,5 +1,7 @@
 import { Command } from "@sapphire/framework";
 
+import { ElevenLabsService } from "../services";
+
 import envVars from "../config/env";
 import { serverIds } from "../utils/envUtils";
 
@@ -21,7 +23,6 @@ class ELabsTestCommand extends Command {
       (builder) => builder.setName(this.name).setDescription(this.description),
       {
         guildIds: serverIds,
-        // idHints: ["1144162080845467730"],
       }
     );
   }
@@ -31,8 +32,12 @@ class ELabsTestCommand extends Command {
   ) {
     await interaction.deferReply();
 
+    const result = await ElevenLabsService.voices.getAll();
+
+    const data = result.voices.slice(0, 3);
+
     return interaction.editReply({
-      content: "lol",
+      content: JSON.stringify(data, null, 2).slice(0, 2000),
     });
   }
 }
