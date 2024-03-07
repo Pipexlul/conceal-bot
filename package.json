@@ -19,12 +19,16 @@
 	},
 	"license": "ISC",
 	"dependencies": {
+		"@discordjs/voice": "^0.16.1",
 		"@sapphire/discord.js-utilities": "^7.1.6",
 		"@sapphire/framework": "^5.0.7",
 		"axios": "^1.6.7",
 		"discord.js": "14.x",
 		"dotenv": "^16.4.5",
 		"elevenlabs": "^0.1.6",
+		"ffmpeg-static": "^5.2.0",
+		"libsodium-wrappers": "^0.7.13",
+		"opusscript": "^0.1.1",
 		"rimraf": "^5.0.5"
 	},
 	"devDependencies": {
