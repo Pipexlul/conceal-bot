@@ -13,4 +13,6 @@ const getServerIds = () => {
   return result;
 };
 
-export { isDev, isTest, isProd, getServerIds };
+const serverIds = getServerIds();
+
+export { isDev, isTest, isProd, serverIds };

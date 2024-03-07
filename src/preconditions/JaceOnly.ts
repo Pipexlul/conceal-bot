@@ -7,7 +7,7 @@ import type {
 
 import envConfig from "../config/env";
 const {
-  nibbas: { jace },
+  conceal: { jace },
 } = envConfig;
 
 class JaceOnlyPrecondition extends AllFlowsPrecondition {

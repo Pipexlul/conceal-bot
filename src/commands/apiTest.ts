@@ -1,8 +1,7 @@
 import { Command } from "@sapphire/framework";
-import axios from "axios";
 
 import envVars from "../config/env";
-import { getServerIds } from "../utils/envUtils";
+import { serverIds } from "../utils/envUtils";
 
 const {
   apiKeys: { elevenlabs },
@@ -21,7 +20,7 @@ class ELabsTestCommand extends Command {
     registry.registerChatInputCommand(
       (builder) => builder.setName(this.name).setDescription(this.description),
       {
-        guildIds: getServerIds(),
+        guildIds: serverIds,
         // idHints: ["1144162080845467730"],
       }
     );
@@ -32,14 +31,8 @@ class ELabsTestCommand extends Command {
   ) {
     await interaction.deferReply();
 
-    const res = await axios.get("https://api.elevenlabs.io/v1/voices", {
-      headers: {
-        "xi-api-key": elevenlabs,
-      },
-    });
-
     return interaction.editReply({
-      content: JSON.stringify(res.data.voices[0], null, 2),
+      content: "lol",
     });
   }
 }

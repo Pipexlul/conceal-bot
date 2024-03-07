@@ -7,7 +7,7 @@ import type {
 
 import envConfig from "../config/env";
 const {
-  nibbas: { pipex },
+  conceal: { pipex },
 } = envConfig;
 
 class PipexOnlyPrecondition extends AllFlowsPrecondition {

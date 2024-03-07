@@ -39,7 +39,7 @@ if (!isValid(DISCORD_BOT_TOKEN)) {
 const config = {
   node_env: isValidEnvironment(NODE_ENV) ? NODE_ENV : "development",
   port: !Number.isNaN(numPort) ? numPort : 3000,
-  nibbas: {
+  conceal: {
     pipex: isValid(PIPEX_ID) ? PIPEX_ID : "",
     jace: isValid(JACE_ID) ? JACE_ID : "",
     swizz: isValid(SWIZZ_ID) ? SWIZZ_ID : "",

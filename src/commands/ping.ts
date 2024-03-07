@@ -1,7 +1,7 @@
 import { isMessageInstance } from "@sapphire/discord.js-utilities";
 import { Command } from "@sapphire/framework";
 
-import { getServerIds } from "../utils/envUtils";
+import { serverIds } from "../utils/envUtils";
 
 class PingCommand extends Command {
   public constructor(context: Command.LoaderContext, options: Command.Options) {
@@ -17,7 +17,7 @@ class PingCommand extends Command {
     registry.registerChatInputCommand(
       (builder) => builder.setName(this.name).setDescription(this.description),
       {
-        guildIds: getServerIds(),
+        guildIds: serverIds,
         idHints: ["1093709132466507796"],
       }
     );

@@ -8,7 +8,7 @@ class ShutdownCommand extends Command {
       ...options,
       name: "shutdown",
       description: "Shuts down the bot (owner only)",
-      preconditions: ["OwnerOnly"],
+      preconditions: ["PipexOnly"],
     });
   }
 
