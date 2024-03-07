@@ -3,12 +3,11 @@ import type { SapphireClient } from "@sapphire/framework";
 const terminateEvents: string[] = ["SIGKILL", "SIGTERM", "SIGINT", "exit"];
 
 const applyExitHandlers = (client: SapphireClient) => {
-  const terminateHandler = () => {
+  const terminateHandler = async () => {
     if (client.token !== null) {
       console.log("Bot client shutting down...");
-      client.destroy().then(() => {
-        console.log("Bot client destroyed");
-      });
+      await client.destroy();
+      console.log("Bot client shut down successfully");
     }
   };
 
