@@ -21,10 +21,12 @@
 		"@sapphire/framework": "^5.0.7",
 		"axios": "^1.6.7",
 		"discord.js": "14.x",
-		"dotenv": "^16.4.5"
+		"dotenv": "^16.4.5",
+		"elevenlabs": "^0.1.6"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.5.3",
+		"@sapphire/cli": "^1.9.3",
 		"@types/lint-staged": "^13.3.0",
 		"@types/node": "^20.11.17",
 		"husky": "^9.0.10",
@@ -32,5 +34,5 @@
 		"ts-node-dev": "^2.0.0",
 		"typescript": "^5.3.3"
 	},
-	"packageManager": "pnpm@8.15.3"
+	"packageManager": "pnpm@8.15.4"
 }

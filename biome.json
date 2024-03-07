@@ -1,10 +1,15 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+	"files": {
+		"include": ["src/**/*.ts", "src/**/*.json"]
+	},
 	"linter": {
 		"enabled": true,
-		"ignore": ["node_modules", "dist", "nuxt", ".platform", ".vscode"],
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"suspicious": {
+				"noExplicitAny": "warn"
+			}
 		}
 	},
 	"javascript": {
