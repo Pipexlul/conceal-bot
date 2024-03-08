@@ -15,5 +15,8 @@ declare namespace NodeJS {
     readonly JACE_ID?: string;
     readonly PIPEX_ID?: string;
     readonly SWIZZ_ID?: string;
+    readonly NATE_ID?: string;
+    readonly MELLOW_ID?: string;
+    readonly MIGUEL_ID?: string;
   }
 }

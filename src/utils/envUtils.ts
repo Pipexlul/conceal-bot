@@ -5,10 +5,10 @@ const isTest = envConfig.node_env === "test";
 const isProd = envConfig.node_env === "production";
 
 const getServerIds = () => {
-  const result: string[] = [envConfig.testServerId];
-  if (isProd) {
-    result.push(envConfig.realServerId);
-  }
+  const result: string[] = [envConfig.testServerId, envConfig.realServerId];
+  // if (isProd) {
+  //   result.push(envConfig.realServerId);
+  // }
 
   return result;
 };

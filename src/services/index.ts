@@ -1,1 +1,1 @@
-export { eLabsClient as ElevenLabsService } from "./ElevenLabs/ElevenLabs";
+export { eLabsClient as ElevenLabsService } from "./ElevenLabs";

@@ -28,7 +28,7 @@ class ChatInputError extends Listener<typeof Events.ChatInputCommandDenied> {
 
     return interaction.reply({
       content: error.message,
-      ephemeral: true,
+      ephemeral: !error.message.toLowerCase().includes("nate"),
     });
   }
 }
