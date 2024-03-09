@@ -1,3 +1,0 @@
-interface ConcealClientOptions {}
-
-export { ConcealClientOptions };
