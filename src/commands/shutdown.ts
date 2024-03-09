@@ -1,17 +1,14 @@
 import { Command } from "@sapphire/framework";
 
+import { ApplyOptions } from "@sapphire/decorators";
 import { serverIds } from "../utils/envUtils";
 
+@ApplyOptions<Command.Options>({
+  name: "shutdown",
+  description: "Shuts down the bot (owners only)",
+  preconditions: ["OwnersOnly"],
+})
 class ShutdownCommand extends Command {
-  public constructor(context: Command.LoaderContext, options: Command.Options) {
-    super(context, {
-      ...options,
-      name: "shutdown",
-      description: "Shuts down the bot (owners only)",
-      preconditions: ["OwnersOnly"],
-    });
-  }
-
   public override registerApplicationCommands(registry: Command.Registry) {
     registry.registerChatInputCommand(
       (builder) => builder.setName(this.name).setDescription(this.description),

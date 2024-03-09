@@ -2,14 +2,15 @@ import { ApplyOptions } from "@sapphire/decorators";
 import { BucketScope, Command } from "@sapphire/framework";
 import { Time } from "@sapphire/time-utilities";
 
+import config from "../config/globals";
 import { ElevenLabsService } from "../services";
 
 @ApplyOptions<Command.Options>({
   name: "tts-info",
   description: "Prints info about ElevenLabs service",
   preconditions: ["OwnersOnly"],
-  cooldownDelay: Time.Second * 10,
-  cooldownScope: BucketScope.User,
+  cooldownDelay: config.ttsMeta.cooldown,
+  cooldownFilteredUsers: config.ttsMeta.filtered,
 })
 class TTSInfoCommand extends Command {
   public override registerApplicationCommands(registry: Command.Registry) {

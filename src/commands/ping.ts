@@ -1,18 +1,18 @@
+import { ApplyOptions } from "@sapphire/decorators";
 import { isMessageInstance } from "@sapphire/discord.js-utilities";
 import { Command } from "@sapphire/framework";
 
 import { serverIds } from "../utils/envUtils";
 
-class PingCommand extends Command {
-  public constructor(context: Command.LoaderContext, options: Command.Options) {
-    super(context, {
-      ...options,
-      name: "Ping",
-      description: "Check epic ping connection",
-      aliases: ["pong", "enemybastion"],
-    });
-  }
+import config from "../config/globals";
 
+@ApplyOptions<Command.Options>({
+  name: "Ping",
+  description: "Check epic ping connection",
+  aliases: ["pong", "enemybastion"],
+  cooldownDelay: config.ping.cooldown,
+})
+class PingCommand extends Command {
   public override registerApplicationCommands(registry: Command.Registry) {
     registry.registerChatInputCommand(
       (builder) => builder.setName(this.name).setDescription(this.description),

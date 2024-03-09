@@ -1,28 +1,24 @@
+import { ApplyOptions } from "@sapphire/decorators";
 import { Command } from "@sapphire/framework";
 
+import config from "../config/globals";
 import { ElevenLabsService, VoiceService } from "../services";
 
-import path from "path";
 import {
-  AudioPlayerStatus,
   createAudioResource,
   getVoiceConnection,
   joinVoiceChannel,
 } from "@discordjs/voice";
 import { isGuildMember } from "@sapphire/discord.js-utilities";
-import envVars from "../config/env";
 import { serverIds } from "../utils/envUtils";
 
+@ApplyOptions<Command.Options>({
+  name: "tts",
+  description: "test tts functions",
+  cooldownDelay: config.tts.cooldown,
+  cooldownFilteredUsers: config.tts.filtered,
+})
 class TTSTest extends Command {
-  public constructor(context: Command.LoaderContext, options: Command.Options) {
-    super(context, {
-      ...options,
-      name: "tts",
-      description: "test tts functions",
-      preconditions: [],
-    });
-  }
-
   public override async registerApplicationCommands(
     registry: Command.Registry
   ) {
