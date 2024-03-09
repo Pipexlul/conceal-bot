@@ -1,12 +1,10 @@
 import { Command } from "@sapphire/framework";
 
-import { ElevenLabsService } from "../services";
+import { ElevenLabsService, VoiceService } from "../services";
 
 import path from "path";
 import {
   AudioPlayerStatus,
-  NoSubscriberBehavior,
-  createAudioPlayer,
   createAudioResource,
   getVoiceConnection,
   joinVoiceChannel,
@@ -15,30 +13,11 @@ import { isGuildMember } from "@sapphire/discord.js-utilities";
 import envVars from "../config/env";
 import { serverIds } from "../utils/envUtils";
 
-let processing = false;
-
-const player = createAudioPlayer({
-  behaviors: {
-    noSubscriber: NoSubscriberBehavior.Pause,
-  },
-});
-
-player.on("stateChange", (oldState, newState) => {
-  if (newState.status === AudioPlayerStatus.Idle) {
-    processing = false;
-  }
-});
-
-const testResource = createAudioResource(
-  path.join(__dirname, "../../audio/rosh_jawa.mp3"),
-  { inlineVolume: true }
-);
-
 class TTSTest extends Command {
   public constructor(context: Command.LoaderContext, options: Command.Options) {
     super(context, {
       ...options,
-      name: "ttstest",
+      name: "tts",
       description: "test tts functions",
       preconditions: [],
     });
@@ -136,7 +115,7 @@ class TTSTest extends Command {
   public override async chatInputRun(
     interaction: Command.ChatInputCommandInteraction
   ) {
-    const defered = await interaction.deferReply({ fetchReply: true });
+    await interaction.deferReply({ ephemeral: true });
 
     const guild = interaction.guild;
     const member = interaction.member;
@@ -151,27 +130,17 @@ class TTSTest extends Command {
       return;
     }
 
-    if (processing) {
+    if (VoiceService.state.busy) {
       await interaction.editReply({
-        content: `I'm already processing a request ${member.displayName}, please wait a moment!`,
+        content: `I'm already processing a request or playing a sound ${member.displayName}, please wait a moment!`,
       });
 
       return;
     }
 
-    processing = true;
-
-    if (player.state.status === AudioPlayerStatus.Playing) {
-      await interaction.editReply({
-        content: `I'm already playing something ${member.displayName}. Wait a moment!`,
-      });
-
-      return;
-    }
+    VoiceService.state.setBusy(true);
 
     let connection = getVoiceConnection(guild.id);
-
-    const message = "";
 
     if (!connection) {
       connection = joinVoiceChannel({
@@ -180,13 +149,8 @@ class TTSTest extends Command {
         adapterCreator: guild.voiceAdapterCreator,
       });
 
-      // message = `Joined ${member.voice.channel?.name}!`;
-    } else {
-      // connection.destroy();
-      // message = `Left ${member.voice.channel?.name}, bye bye (loser)`;
+      VoiceService.state.subscribeToConnection(connection);
     }
-
-    connection.subscribe(player);
 
     const tts = await ElevenLabsService.generate({
       stream: true,
@@ -200,17 +164,11 @@ class TTSTest extends Command {
 
     ttsResource.volume?.setVolume(volume);
 
-    if (message) {
-      await interaction.editReply({
-        content: `${message}\n\nFriendly reminder that this command cannot be used by Nate!`,
-      });
-    } else {
-      await interaction.editReply({
-        content: "Playing...",
-      });
-    }
+    await interaction.editReply({
+      content: "Playing TTS...",
+    });
 
-    player.play(ttsResource);
+    VoiceService.state.audioPlayer.play(ttsResource);
   }
 }
 

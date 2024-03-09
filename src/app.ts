@@ -6,6 +6,10 @@ const { discordToken } = envConfig;
 import concealClient from "./client";
 import { applyExitHandlers } from "./utils/appExitHandler";
 
+import {
+  ApplicationCommandRegistries,
+  RegisterBehavior,
+} from "@sapphire/framework";
 import { isDev } from "./utils/envUtils";
 
 const main = async () => {
@@ -17,6 +21,10 @@ const main = async () => {
     applyExitHandlers(concealClient);
 
     await concealClient.login(discordToken);
+
+    ApplicationCommandRegistries.setDefaultBehaviorWhenNotIdentical(
+      RegisterBehavior.BulkOverwrite
+    );
 
     concealClient.user?.setPresence({
       status: "online",

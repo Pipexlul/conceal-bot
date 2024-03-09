@@ -28,6 +28,9 @@ class ShutdownCommand extends Command {
       ephemeral: true,
       content: "Shutting down...",
     });
+
+    console.log("Bot client shutting down...");
+
     await this.container.client.destroy();
 
     process.exit(0);
