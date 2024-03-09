@@ -17,7 +17,7 @@ const {
   TEST_SERVER_ID,
   ELEVENLABS_API_KEY,
   INWORLD_API_KEY,
-  TEST_ONLY,
+  DEBUG_MODE,
 } = process.env;
 
 const isValid = (value?: string): value is string =>
@@ -30,7 +30,13 @@ const isValidEnvironment = (value?: string): value is EnvType => {
 const isValidEnvironmentBoolean = (value?: string): boolean => {
   const lcVal = value?.toLowerCase();
 
-  return lcVal === "true" || lcVal === "false";
+  if (lcVal === "true" || lcVal === "false") {
+    return true;
+  }
+
+  console.warn("Tried to parse env value as boolean but failed: ", value);
+
+  return false;
 };
 
 const numPort = isValid(PORT) ? parseInt(PORT) : NaN;
@@ -57,7 +63,9 @@ const config = {
     elevenlabs: isValid(ELEVENLABS_API_KEY) ? ELEVENLABS_API_KEY : "",
     inworld: isValid(INWORLD_API_KEY) ? INWORLD_API_KEY : "",
   },
-  testOnly: isValidEnvironmentBoolean(TEST_ONLY),
+  isDebug: isValidEnvironmentBoolean(DEBUG_MODE)
+    ? DEBUG_MODE === "true"
+    : false,
 };
 
 export default config;

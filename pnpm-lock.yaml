@@ -14,6 +14,9 @@ dependencies:
   '@sapphire/framework':
     specifier: ^5.0.7
     version: 5.0.7
+  '@sapphire/utilities':
+    specifier: ^3.15.3
+    version: 3.15.3
   axios:
     specifier: ^1.6.7
     version: 1.6.7
@@ -46,6 +49,9 @@ devDependencies:
   '@sapphire/cli':
     specifier: ^1.9.3
     version: 1.9.3
+  '@sapphire/decorators':
+    specifier: ^6.0.4
+    version: 6.0.4
   '@types/lint-staged':
     specifier: ^13.3.0
     version: 13.3.0
@@ -330,6 +336,13 @@ packages:
       find-up: 5.0.0
       js-yaml: 4.1.0
       prompts: 2.4.2
+      tslib: 2.6.2
+    dev: true
+
+  /@sapphire/decorators@6.0.4:
+    resolution: {integrity: sha512-FZJ3ajnJ6yIj42Z4u4vBli5CZ4nz80WKj8STfhrVfzZ2lzZuJBFOIH+pU9VzWaTfIXKrK/OaK9gj4mfABERJnw==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
+    dependencies:
       tslib: 2.6.2
     dev: true
 

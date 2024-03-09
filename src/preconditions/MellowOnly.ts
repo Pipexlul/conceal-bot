@@ -7,31 +7,33 @@ import type {
 
 import envConfig from "../config/env";
 const {
-  conceal: { pipex },
+  conceal: { mellow },
 } = envConfig;
 
-class PipexOnlyPrecondition extends AllFlowsPrecondition {
+class MellowOnlyPrecondition extends AllFlowsPrecondition {
+  private errMessage = "This command can only be used by MellowLiving";
+
   public override async messageRun(message: Message) {
-    return this.checkPipex(message.author.id);
+    return this.checkMellow(message.author.id);
   }
 
   public override async chatInputRun(interaction: CommandInteraction) {
-    return this.checkPipex(interaction.user.id);
+    return this.checkMellow(interaction.user.id);
   }
 
   public override async contextMenuRun(
     interaction: ContextMenuCommandInteraction
   ) {
-    return this.checkPipex(interaction.user.id);
+    return this.checkMellow(interaction.user.id);
   }
 
-  private async checkPipex(userId: string) {
-    return userId === pipex
+  private async checkMellow(userId: string) {
+    return userId === mellow
       ? this.ok()
       : this.error({
-          message: "This command can only be used by Pipex",
+          message: this.errMessage,
         });
   }
 }
 
-export { PipexOnlyPrecondition };
+export { MellowOnlyPrecondition };

@@ -24,7 +24,10 @@ class ShutdownCommand extends Command {
   public override async chatInputRun(
     interaction: Command.ChatInputCommandInteraction
   ) {
-    await interaction.reply("Shutting bot down...");
+    await interaction.reply({
+      ephemeral: true,
+      content: "Shutting down...",
+    });
     await this.container.client.destroy();
 
     process.exit(0);

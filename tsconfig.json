@@ -12,6 +12,7 @@
 		"forceConsistentCasingInFileNames": true,
 		"moduleResolution": "Node16",
 		"allowSyntheticDefaultImports": true,
+		"experimentalDecorators": true
 		// "baseUrl": "./src",
 		// "paths": {
 		// 	"@/env": ["config/env"],

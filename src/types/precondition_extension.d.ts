@@ -1,7 +1,9 @@
 declare module "@sapphire/framework" {
   interface Preconditions {
-    PipexOnly: never;
+    OwnersOnly: never;
     JaceOnly: never;
+    PipexOnly: never;
+    MellowOnly: never;
     NotNate: never;
   }
 }

@@ -4,6 +4,7 @@ import { ElevenLabsService } from "../services";
 
 import path from "path";
 import {
+  AudioPlayerStatus,
   NoSubscriberBehavior,
   createAudioPlayer,
   createAudioResource,
@@ -14,10 +15,18 @@ import { isGuildMember } from "@sapphire/discord.js-utilities";
 import envVars from "../config/env";
 import { serverIds } from "../utils/envUtils";
 
+let processing = false;
+
 const player = createAudioPlayer({
   behaviors: {
     noSubscriber: NoSubscriberBehavior.Pause,
   },
+});
+
+player.on("stateChange", (oldState, newState) => {
+  if (newState.status === AudioPlayerStatus.Idle) {
+    processing = false;
+  }
 });
 
 const testResource = createAudioResource(
@@ -31,7 +40,7 @@ class TTSTest extends Command {
       ...options,
       name: "ttstest",
       description: "test tts functions",
-      preconditions: ["NotNate"],
+      preconditions: [],
     });
   }
 
@@ -139,6 +148,24 @@ class TTSTest extends Command {
       member.voice.channelId === null
     ) {
       // TODO: FG: Error handling?
+      return;
+    }
+
+    if (processing) {
+      await interaction.editReply({
+        content: `I'm already processing a request ${member.displayName}, please wait a moment!`,
+      });
+
+      return;
+    }
+
+    processing = true;
+
+    if (player.state.status === AudioPlayerStatus.Playing) {
+      await interaction.editReply({
+        content: `I'm already playing something ${member.displayName}. Wait a moment!`,
+      });
+
       return;
     }
 
