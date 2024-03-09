@@ -18,17 +18,29 @@ class ChatInputError extends Listener<typeof Events.ChatInputCommandDenied> {
   }
 
   public run(error: UserError, payload: ChatInputCommandDeniedPayload) {
+    let message = error.message;
+
+    if (error.identifier === "preconditionCooldown") {
+      const cooldownContext = error.context as {
+        remaining: number;
+      };
+
+      const formattedSeconds = (cooldownContext.remaining / 1000).toFixed(1);
+
+      message = `You're on cooldown. Please wait ${formattedSeconds} seconds before trying again.`;
+    }
+
     const { interaction } = payload;
 
     if (interaction.deferred || interaction.replied) {
       return interaction.editReply({
-        content: error.message,
+        content: message,
       });
     }
 
     return interaction.reply({
-      content: error.message,
-      ephemeral: !error.message.toLowerCase().includes("nate"),
+      content: message,
+      ephemeral: true,
     });
   }
 }

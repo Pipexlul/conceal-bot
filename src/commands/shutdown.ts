@@ -3,12 +3,12 @@ import { Command } from "@sapphire/framework";
 import { serverIds } from "../utils/envUtils";
 
 class ShutdownCommand extends Command {
-  public constructor(context: Command.Context, options: Command.Options) {
+  public constructor(context: Command.LoaderContext, options: Command.Options) {
     super(context, {
       ...options,
       name: "shutdown",
-      description: "Shuts down the bot (owner only)",
-      preconditions: ["PipexOnly"],
+      description: "Shuts down the bot (owners only)",
+      preconditions: ["OwnersOnly"],
     });
   }
 

@@ -1,13 +1,17 @@
 import { ApplyOptions } from "@sapphire/decorators";
-import { Command } from "@sapphire/framework";
+import { BucketScope, Command } from "@sapphire/framework";
+import { Time } from "@sapphire/time-utilities";
+
 import { ElevenLabsService } from "../services";
 
 @ApplyOptions<Command.Options>({
   name: "tts-info",
   description: "Prints info about ElevenLabs service",
   preconditions: ["OwnersOnly"],
+  cooldownDelay: Time.Second * 10,
+  cooldownScope: BucketScope.User,
 })
-class TestCommand extends Command {
+class TTSInfoCommand extends Command {
   public override registerApplicationCommands(registry: Command.Registry) {
     registry.registerChatInputCommand((builder) =>
       builder //
@@ -37,4 +41,4 @@ class TestCommand extends Command {
   }
 }
 
-export { TestCommand };
+export { TTSInfoCommand };

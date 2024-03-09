@@ -14,6 +14,9 @@ dependencies:
   '@sapphire/framework':
     specifier: ^5.0.7
     version: 5.0.7
+  '@sapphire/time-utilities':
+    specifier: ^1.7.12
+    version: 1.7.12
   '@sapphire/utilities':
     specifier: ^3.15.3
     version: 3.15.3
@@ -339,6 +342,13 @@ packages:
       tslib: 2.6.2
     dev: true
 
+  /@sapphire/cron@1.1.3:
+    resolution: {integrity: sha512-Sc0ebl3aD6RNUx4WkWgBOucI/azyVYGBpmO8oLnyCX6GBtF+YSQv8jODQ2sf/szkimhqTXrFYk6pEhA74CGtYg==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
+    dependencies:
+      '@sapphire/utilities': 3.15.3
+    dev: false
+
   /@sapphire/decorators@6.0.4:
     resolution: {integrity: sha512-FZJ3ajnJ6yIj42Z4u4vBli5CZ4nz80WKj8STfhrVfzZ2lzZuJBFOIH+pU9VzWaTfIXKrK/OaK9gj4mfABERJnw==}
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
@@ -431,6 +441,26 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /@sapphire/time-utilities@1.7.12:
+    resolution: {integrity: sha512-naqA2CxIseXyAx3OnzB1dW8b9iEsUJHzzlXs4QCBmssQ28nRTfuPSE86c/ELfLGr6f+S0Sca2dxUwTsL5Wf8MQ==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
+    dependencies:
+      '@sapphire/cron': 1.1.3
+      '@sapphire/duration': 1.1.2
+      '@sapphire/timer-manager': 1.0.2
+      '@sapphire/timestamp': 1.0.3
+    dev: false
+
+  /@sapphire/timer-manager@1.0.2:
+    resolution: {integrity: sha512-0/wQEeiYeENQNtCVjhLZA2hDFqshNwWRR0ewXXENggTtkSqL7l+FadP1FZIMLRB69vnsZKdL2GuEHDuWayJbAQ==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
+    dev: false
+
+  /@sapphire/timestamp@1.0.3:
+    resolution: {integrity: sha512-I2TwqlLDA2Uu576VUgyBaT1gP1WSWPxeW3NqFxsSJfwFyvzXkTzyQiYce0eWMpM6BdBCq7Dddg+Yayls/5K1RA==}
+    engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
   /@sapphire/utilities@3.15.3:

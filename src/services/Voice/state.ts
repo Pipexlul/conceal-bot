@@ -39,10 +39,6 @@ class VoiceState {
     this._voiceSubscription = undefined;
   }
 
-  get root() {
-    return this;
-  }
-
   get audioPlayer() {
     return this._audioPlayer;
   }
