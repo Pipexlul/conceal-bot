@@ -4,7 +4,7 @@ import { Command } from "@sapphire/framework";
 
 import { serverIds } from "../utils/envUtils";
 
-import config from "../config/globals";
+import { cooldownConfig as config } from "../config/globals";
 
 @ApplyOptions<Command.Options>({
   name: "Ping",

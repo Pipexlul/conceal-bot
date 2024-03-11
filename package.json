@@ -20,6 +20,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@discordjs/voice": "^0.16.1",
+		"@inworld/nodejs-sdk": "^1.11.0",
 		"@sapphire/discord.js-utilities": "^7.1.6",
 		"@sapphire/framework": "^5.0.7",
 		"@sapphire/time-utilities": "^1.7.12",

@@ -17,6 +17,8 @@ const {
   TEST_SERVER_ID,
   ELEVENLABS_API_KEY,
   INWORLD_API_KEY,
+  INWORLD_API_SECRET,
+  INWORLD_API_STUDIO_BASE64,
   DEBUG_MODE,
 } = process.env;
 
@@ -61,7 +63,13 @@ const config = {
   testServerId: isValid(TEST_SERVER_ID) ? TEST_SERVER_ID : "",
   apiKeys: {
     elevenlabs: isValid(ELEVENLABS_API_KEY) ? ELEVENLABS_API_KEY : "",
-    inworld: isValid(INWORLD_API_KEY) ? INWORLD_API_KEY : "",
+    inworld: {
+      key: isValid(INWORLD_API_KEY) ? INWORLD_API_KEY : "",
+      secret: isValid(INWORLD_API_SECRET) ? INWORLD_API_SECRET : "",
+      studio: isValid(INWORLD_API_STUDIO_BASE64)
+        ? INWORLD_API_STUDIO_BASE64
+        : "",
+    },
   },
   isDebug: isValidEnvironmentBoolean(DEBUG_MODE)
     ? DEBUG_MODE === "true"

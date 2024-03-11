@@ -2,8 +2,9 @@ import { ApplyOptions } from "@sapphire/decorators";
 import { BucketScope, Command } from "@sapphire/framework";
 import { Time } from "@sapphire/time-utilities";
 
-import config from "../config/globals";
+import { cooldownConfig as config } from "../config/globals";
 import { ElevenLabsService } from "../services";
+import { serverIds } from "../utils/envUtils";
 
 @ApplyOptions<Command.Options>({
   name: "tts-info",
@@ -14,10 +15,14 @@ import { ElevenLabsService } from "../services";
 })
 class TTSInfoCommand extends Command {
   public override registerApplicationCommands(registry: Command.Registry) {
-    registry.registerChatInputCommand((builder) =>
-      builder //
-        .setName(this.name)
-        .setDescription(this.description)
+    registry.registerChatInputCommand(
+      (builder) =>
+        builder //
+          .setName(this.name)
+          .setDescription(this.description),
+      {
+        guildIds: serverIds,
+      }
     );
   }
 

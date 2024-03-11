@@ -1,7 +1,7 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { Command } from "@sapphire/framework";
 
-import config from "../config/globals";
+import { cooldownConfig as config } from "../config/globals";
 import { ElevenLabsService, VoiceService } from "../services";
 
 import {

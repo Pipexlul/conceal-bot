@@ -2,7 +2,7 @@ import { Time } from "@sapphire/time-utilities";
 
 import envConfig from "./env";
 
-interface IGlobalConfig {
+interface ICooldownConfig {
   [cmdCategory: string]: {
     cooldown: number;
     filtered?: string[];
@@ -13,7 +13,7 @@ const { conceal } = envConfig;
 
 const ms = (seconds: number) => Time.Second * seconds;
 
-const globalConfig = {
+const cooldownConfig = {
   tts: {
     cooldown: ms(15),
     filtered: [conceal.jace],
@@ -22,9 +22,18 @@ const globalConfig = {
     cooldown: ms(5),
     filtered: [conceal.jace, conceal.pipex],
   },
+  inworld: {
+    cooldown: ms(2),
+  },
   ping: {
     cooldown: ms(5),
   },
-} satisfies IGlobalConfig;
+} satisfies ICooldownConfig;
 
-export default globalConfig;
+const globalConfig = {
+  inworld: {
+    workspace: "conceal",
+  },
+};
+
+export { globalConfig, cooldownConfig };
