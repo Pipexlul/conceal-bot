@@ -28,6 +28,9 @@ const cooldownConfig = {
   ping: {
     cooldown: ms(5),
   },
+  talk: {
+    cooldown: ms(20),
+  },
 } satisfies ICooldownConfig;
 
 const globalConfig = {
