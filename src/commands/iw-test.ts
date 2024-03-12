@@ -1,8 +1,13 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { Command } from "@sapphire/framework";
 
+import { ServiceError } from "@inworld/nodejs-sdk";
 import { cooldownConfig } from "../config/globals";
-import { IDiscordUser, inworldService } from "../services/InWorld";
+import {
+  IDiscordUser,
+  inworldCharacters,
+  inworldService,
+} from "../services/InWorld";
 import { serverIds } from "../utils/envUtils";
 
 @ApplyOptions<Command.Options>({
@@ -24,7 +29,7 @@ class IWTestCommand extends Command {
   public override async registerApplicationCommands(
     registry: Command.Registry
   ) {
-    const charactersRes = await inworldService.getCharacters();
+    const charactersRes = await inworldCharacters.getCharacters();
 
     const charNames =
       charactersRes?.map((char) => ({
@@ -61,25 +66,41 @@ class IWTestCommand extends Command {
   public override async chatInputRun(
     interaction: Command.ChatInputCommandInteraction
   ) {
-    await interaction.deferReply();
-
     const user = this.extractUser(interaction);
 
     const char = interaction.options.getString("character", true);
+    const prettyName = await inworldCharacters.charIdToName(char);
     const message = interaction.options.getString("message", true);
 
-    const packet = await inworldService.talkToCharacter(
+    const reply = await interaction.reply({
+      fetchReply: true,
+      content: `${interaction.user.displayName} message to ${prettyName}:\n\n${message}`,
+    });
+
+    const msgHandler = async (
+      fullMessage: string | null,
+      err: ServiceError | null
+    ) => {
+      if (err) {
+        await reply.reply({
+          content: `Error: ${err.message}`,
+        });
+
+        return;
+      }
+
+      await reply.reply({
+        content: `${prettyName} replied: ${fullMessage}`,
+      });
+    };
+
+    const sendText = await inworldService.talkToCharacter(
       user,
       char,
-      message,
-      interaction
+      msgHandler
     );
 
-    if (typeof packet === "string") {
-      return await interaction.editReply({
-        content: `Error: ${packet}`,
-      });
-    }
+    await sendText(message);
   }
 }
 

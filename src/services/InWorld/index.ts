@@ -2,10 +2,9 @@ import {
   InworldClient,
   InworldConnectionService,
   InworldPacket,
+  ServiceError,
 } from "@inworld/nodejs-sdk";
 import { inWorldAxios } from "./axios";
-
-type InworldConnection = InworldConnectionService<InworldPacket>;
 
 interface IDiscordUser {
   id: string;
@@ -22,155 +21,115 @@ const {
   apiKeys: { inworld },
 } = envConfig;
 
-import { Command } from "@sapphire/framework";
 import { globalConfig } from "../../config/globals";
 
 const iwWorkspace = globalConfig.inworld.workspace;
 
-class InWorldService {
-  private clientsMap: Map<string, InworldConnection>;
-  private interactionReplies: Map<string, string[]>;
-  private characters: ICharacter[];
+class InWorldCharacters {
+  private _cachedCharacters: ICharacter[] | null = null;
 
-  constructor() {
-    this.clientsMap = new Map();
-    this.characters = [];
-    this.interactionReplies = new Map();
+  public async charIdToName(charId: string) {
+    const defaultName = "Character";
 
-    this.getCharacters().then((characters) => {
-      if (characters) {
-        this.characters = characters;
-      }
-    });
+    const characters = await this.getCharacters();
+
+    if (!characters) {
+      return defaultName;
+    }
+
+    const character = characters.find((char) => char.id === charId);
+
+    return character?.name ?? defaultName;
   }
 
-  private generateMapId = (user: IDiscordUser, characterId: string) =>
-    `${user.id}-${characterId}`;
-
-  // TODO: FG: Use a map for faster lookup
-  private getCharacterName = (characterId: string) => {
-    const character = this.characters.find((char) => char.id === characterId);
-
-    return character?.name;
-  };
-
   public async getCharacters() {
+    if (this._cachedCharacters) {
+      return this._cachedCharacters;
+    }
+
     try {
       const res = await inWorldAxios.get(
         `/workspaces/${iwWorkspace}/characters`
       );
 
-      const characters = (res.data.characters as TODO[]).map((char) => ({
-        id: char.name,
-        name: char.defaultCharacterDescription.givenName,
-      }));
+      const characters: ICharacter[] = (res.data.characters as TODO[]).map(
+        (char) => ({
+          id: char.name,
+          name: char.defaultCharacterDescription.givenName,
+        })
+      );
+
+      this._cachedCharacters = characters;
 
       return characters;
     } catch (err) {
-      console.error("GETCHARACTERS ERROR");
+      console.error("LOADCHARACTERS ERROR");
       console.error(err);
+
       return null;
     }
   }
+}
+
+class InWorldService {
+  private interactionReplies: Map<string, string[]> = new Map();
 
   public async talkToCharacter(
     user: IDiscordUser,
     characterId: string,
-    message: string,
-    interaction: Command.ChatInputCommandInteraction
-  ): Promise<InworldPacket | string> {
-    const mapId = this.generateMapId(user, characterId);
+    messageHandler: (
+      fullMessage: string | null,
+      err: ServiceError | null
+    ) => void
+  ) {
+    const connection = new InworldClient()
+      .setApiKey({
+        key: inworld.key,
+        secret: inworld.secret,
+      })
+      .setConfiguration({
+        capabilities: {
+          audio: false,
+        },
+      })
+      .setUser({
+        fullName: user.name,
+      })
+      .setScene(characterId)
+      .setOnError((err) => {
+        console.error(err); // TODO: FG: Improve error handling
 
-    const characterName = this.getCharacterName(characterId);
+        messageHandler(null, err);
+      })
+      .setOnMessage((packet) => {
+        const interactionId = packet.packetId.interactionId;
 
-    if (!this.clientsMap.has(mapId)) {
-      const client = new InworldClient()
-        .setApiKey({
-          key: inworld.key,
-          secret: inworld.secret,
-        })
-        .setConfiguration({
-          capabilities: {
-            audio: false,
-          },
-        })
-        .setUser({
-          fullName: user.name,
-        })
-        .setScene(characterId)
-        .setOnError((err) => {
-          console.error(err); // TODO: FG: Improve error handling
-        })
-        .setOnMessage((packet) => {
-          const logData = {
-            packetId: packet.packetId,
-            isEnd: packet.isInteractionEnd(),
-            isText: packet.isText(),
-            source: packet.routing.source.isPlayer ? "PLAYER" : "CHARACTER",
-            target: packet.routing.target.isPlayer ? "PLAYER" : "CHARACTER",
-            text: packet.isText() ? packet.text : null,
-          };
+        let replies = this.interactionReplies.get(interactionId);
 
-          console.log("INWORLD MESSAGE");
-          console.log(logData);
+        if (!replies) {
+          replies = [];
+          this.interactionReplies.set(interactionId, replies);
+        }
 
-          if (interaction.deferred) {
-            if (
-              (packet.routing.source.isCharacter &&
-                packet.routing.target.isPlayer &&
-                packet.isText()) ||
-              packet.isInteractionEnd()
-            ) {
-              if (!this.interactionReplies.has(packet.packetId.interactionId)) {
-                this.interactionReplies.set(packet.packetId.interactionId, []);
-              }
+        if (packet.isInteractionEnd()) {
+          messageHandler(replies.join("\n\n"), null);
+          this.interactionReplies.delete(interactionId);
 
-              const replies = this.interactionReplies.get(
-                packet.packetId.interactionId
-              );
+          return;
+        }
 
-              if (!replies) {
-                throw new Error("No replies found");
-              }
+        if (packet.isText()) {
+          replies.push(packet.text.text);
+        }
+      })
+      .build();
 
-              let characterResponse = "";
-              if (!packet.isInteractionEnd()) {
-                replies.push(packet.text.text);
-              } else {
-                characterResponse = replies.join("\n");
-                this.interactionReplies.delete(packet.packetId.interactionId);
-
-                const reply = `${interaction.user.displayName}: ${message}\n\n${characterName}: ${characterResponse}`;
-
-                const clientConnection = this.clientsMap.get(mapId);
-
-                if (clientConnection) {
-                }
-
-                interaction.editReply({
-                  content: reply,
-                });
-              }
-            }
-          }
-        });
-
-      const connection = client.build();
-
-      this.clientsMap.set(mapId, connection);
-    }
-
-    const clientData = this.clientsMap.get(mapId);
-
-    if (!clientData) {
-      return "No client found";
-    }
-
-    return await clientData.sendText(message);
+    return connection.sendText.bind(connection);
   }
 }
 
+const inworldCharacters = new InWorldCharacters();
 const inworldService = new InWorldService();
 
-export { inworldService };
+export { inworldService, inworldCharacters };
 export type { IDiscordUser };
