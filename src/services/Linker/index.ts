@@ -21,9 +21,9 @@ class LinkerService {
 
   public getElevenLabsId(inworldId: string): string {
     const name =
-      this._inworldToElevenLabs.get(this.getKey(inworldId)) ?? "Ethan";
+      this._inworldToElevenLabs.get(this.getKey(inworldId)) ?? "Chris";
 
-    return this.characterData.find((v) => v.name === name)?.voice_id ?? "Ethan";
+    return this.characterData.find((v) => v.name === name)?.voice_id ?? "Chris";
   }
 }
 

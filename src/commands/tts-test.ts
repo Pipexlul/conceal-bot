@@ -148,12 +148,15 @@ class TTSTest extends Command {
       VoiceService.state.subscribeToConnection(connection);
     }
 
-    const tts = await ElevenLabsService.generate({
-      stream: true,
-      text: interaction.options.getString("message") ?? "",
-      model_id: "eleven_multilingual_v2",
-      voice: interaction.options.getString("voice") ?? "Matthew",
-    });
+    const tts = await ElevenLabsService.generate(
+      {
+        stream: true,
+        text: interaction.options.getString("message") ?? "",
+        model_id: "eleven_multilingual_v2",
+        voice: interaction.options.getString("voice") ?? "Matthew",
+      },
+      { timeoutInSeconds: 120 }
+    );
 
     const ttsResource = createAudioResource(tts, { inlineVolume: true });
     const volume = interaction.options.getNumber("volume") ?? 1;
